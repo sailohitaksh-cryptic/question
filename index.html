@@ -13,6 +13,9 @@
             margin: 0;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+            flex-direction: column;
         }
         .container {
             text-align: center;
@@ -26,17 +29,28 @@
         #no-button {
             position: absolute;
         }
+        #initial-gif, #yes-gif {
+            width: 300px;
+            margin-bottom: 20px;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Will you join me on a movie date?</h1>
+    <img id="initial-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExemc0ZGhpZXMwYjRvOWNpcTg2cWdweTk2M2RhZW1tMXBtYzJodDY2dSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/vyMtU2o0kkuu55fcUy/giphy.gif" alt="Sad dog">
+    <img id="yes-gif" src="https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif" alt="Excited puppy" style="display:none;">
+    
+    <div class="container" id="question-container">
+        <h1>Will you watch a movie with me?</h1>
         <button id="yes-button">Yes</button>
         <button id="no-button">No</button>
     </div>
 
     <script>
         const noButton = document.getElementById('no-button');
+        const initialGif = document.getElementById('initial-gif');
+        const yesGif = document.getElementById('yes-gif');
+        const questionContainer = document.getElementById('question-container');
 
         noButton.addEventListener('mouseover', () => {
             const x = Math.random() * (window.innerWidth - noButton.clientWidth);
@@ -46,7 +60,18 @@
         });
 
         document.getElementById('yes-button').addEventListener('click', () => {
-            alert('Great! Looking forward to it!');
+            document.body.style.backgroundColor = 'pink';
+            initialGif.style.display = 'none';
+            yesGif.style.display = 'block';
+            questionContainer.style.display = 'none';
+
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            alert('yayyyyyyyyyyyyyy!');
         });
     </script>
 </body>
